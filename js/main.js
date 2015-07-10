@@ -45,7 +45,7 @@ $(document).ready(function () {
 							return false;
 						} else if (data === 'error') {
 							mensaje = 'Usted no puede participar.';
-							$('#mensajeError').html(mensaje).stop().fadeIn('fast');
+							$('#mensajeError').html(mensaje).stop().fadeIn('fast').delay(3000).fadeOut('fast');
 							return false;
 						} else if (data === 'gracias') {
 							$('#inicio').fadeToggle('fast', 'swing', function() {
@@ -55,9 +55,12 @@ $(document).ready(function () {
 						}
 					}
 				});
+			} else {
+				$('#mensajeError').html(mensaje).stop().fadeIn('fast').delay(3000).fadeOut('fast');
 			}
+		} else {
+			$('#mensajeError').html(mensaje).stop().fadeIn('fast').delay(3000).fadeOut('fast');
 		}
-		$('#mensajeError').html(mensaje).stop().fadeIn('fast').delay(4000).fadeOut('fast');
 		return false;
 	});
 	$('#elegirArchivo').click(function() {
@@ -92,6 +95,7 @@ $(document).ready(function () {
 			},
 			uploadProgress:function (event, position, total, percentComplete){
 				$("#progress-bar").width(percentComplete + '%');
+				$("#progress-status").html(percentComplete + '%');
 			},
 			success:function (data) {
 				// mensaje

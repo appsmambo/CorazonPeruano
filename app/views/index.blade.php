@@ -101,7 +101,10 @@
 						</div>
 						<div class="paso-2" style="display:none">
 							<div class="progreso pull-left" id="progress-div">
-								<div id="progress-bar"></div>
+								<div id="progress-bar">
+									<div id="progress-status">
+									</div>
+								</div>
 							</div>
 							<span class="archivo text-right"></span>
 							<a href="#" id="confirmar" class="pull-right">

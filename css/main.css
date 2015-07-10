@@ -132,6 +132,14 @@ label {
 	margin-top:0!important;
 	width:auto
 }
+#progress-status {
+	background:transparent;
+	width:174px!important;
+	height:18px;
+	font-size:14px;
+	line-height:19px;
+	text-align:center
+}
 .archivo {
 	font-family:'DINNextLTPro-Medium';
 	color:#03539f;
