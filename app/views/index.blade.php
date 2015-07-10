@@ -63,6 +63,8 @@
 					Ingresa tu DNI para acceder:
 					<br>
 					<input type="text" name="dni" id="dni" maxlength="8">
+					<br>
+					<span id="mensajeError" class="label label-danger" style="display:none"></span>
 				</label>
 				<p class="text-center">
 					<a href="#" class="entrar">
@@ -135,7 +137,7 @@
 		<div style="display:none">
 			<form id="enviarDatos" action="{{url()}}/enviarDatos" method="post" enctype="multipart/form-data">
 				<input type="file" id="archivo" name="archivo" accept="video/*">
-				<input type="hidden" name="dni">
+				<input type="hidden" name="dni" id="tuDni">
 			</form>
 		</div>
 		<footer>

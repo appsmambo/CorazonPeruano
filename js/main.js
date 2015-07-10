@@ -26,12 +26,38 @@ $(document).ready(function () {
 		}
 	});
 	$('.entrar').click(function() {
+		var mensaje = 'Ingresa tu DNI correctamente!';
 		var dni = $('#dni').val();
-		if (parseInt(dni) > 0) {  // validar si existe
-			$('#inicio').fadeToggle('fast', 'swing', function() {
-				$('#subirVideo').fadeToggle('slow');
-			});
+		if (parseInt(dni) > 0) {
+			if (dni.length === 8) {
+				// validar el dni
+				$.ajax({
+					url:urlBase + '/tuDni',
+					type:'POST',
+					data:'dni=' + dni,
+					dataType:'text',
+					success: function (data) {
+						if (data === 'ok') {
+							$('#inicio').fadeToggle('fast', 'swing', function() {
+								$('#tuDni').val(dni);
+								$('#subirVideo').fadeToggle('slow');
+							});
+							return false;
+						} else if (data === 'error') {
+							mensaje = 'Usted no puede participar.';
+							$('#mensajeError').html(mensaje).stop().fadeIn('fast');
+							return false;
+						} else if (data === 'gracias') {
+							$('#inicio').fadeToggle('fast', 'swing', function() {
+								$('#mensaje').fadeToggle('slow');
+							});
+							return false;
+						}
+					}
+				});
+			}
 		}
+		$('#mensajeError').html(mensaje).stop().fadeIn('fast').delay(4000).fadeOut('fast');
 		return false;
 	});
 	$('#elegirArchivo').click(function() {
@@ -77,6 +103,4 @@ $(document).ready(function () {
 		});
 		return false;
 	});
-	
-	
 });
