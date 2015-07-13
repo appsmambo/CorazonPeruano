@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Corazón Peruano</title>
+		<title>Entel Perú, Corazón Peruano</title>
 		<link href="{{url()}}/css/bootstrap.min.css" rel="stylesheet">
 		<link href="{{url()}}/css/main.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -26,7 +26,7 @@
 					maxTime:25000,
 					fadeOutTime:1000,
 					onComplete: function() {
-						setTimeout(function(){ $('#inicio').fadeToggle('slow', 'swing'); }, 500);
+						setTimeout(function(){ $('#inicio').fadeToggle('slow', 'swing'); }, 1500);
 					}
 				});
 			});
