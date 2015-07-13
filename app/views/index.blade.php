@@ -24,7 +24,10 @@
 					barHeight:1,
 					minimumTime:200,
 					maxTime:25000,
-					fadeOutTime:1000
+					fadeOutTime:1000,
+					onComplete: function() {
+						setTimeout(function(){ $('#inicio').fadeToggle('slow', 'swing'); }, 500);
+					}
 				});
 			});
 		</script>
@@ -56,7 +59,7 @@
 				</div>
 			</section>
 		</header>
-		<div id="inicio" class="jumbotron">
+		<div id="inicio" class="jumbotron" style="display:none">
 			<div class="container">
 				<img src="{{url()}}/img/corazon-peruano-home.png" alt="#corazónperuano" class="img-responsive center-block">
 				<label class="center-block text-center">
