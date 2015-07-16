@@ -1,0 +1,9 @@
+.progreso {
+	background-image:url('../img/ajax-loader.gif')!important;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-color:transparent!important
+}
+.progress-bar, #progress-status {
+	display:none!important
+}

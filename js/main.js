@@ -1,17 +1,14 @@
 var flagTyc = false, 
-	flagArchivo = false,
 	flagConfirmar = true,
 	archivo;
 function paso2() {
-	if (flagArchivo && flagTyc) {
-		$('.paso-1').fadeToggle('fast', 'swing', function() {
-			$('.paso-2').fadeToggle('slow');
-		});
-	}
+	$('.paso-1').fadeToggle('fast', 'swing', function() {
+		$('.paso-2').show('fast');
+	});
 }
 $(document).ready(function () {
 	$("#dni").bind("keydown", function (event) {
-	  if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+		if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
 				// Allow: Ctrl+A
 				(event.keyCode == 65 && event.ctrlKey === true) || 
 				// Allow: home, end, left, right
@@ -29,7 +26,7 @@ $(document).ready(function () {
 		var mensaje = 'Ingresa tu DNI correctamente!';
 		var dni = $('#dni').val();
 		if (parseInt(dni) > 0) {
-			if (dni.length === 8) {
+			if (dni.length >= 8) {
 				// validar el dni
 				$.ajax({
 					url:urlBase + '/tuDni',
@@ -37,22 +34,22 @@ $(document).ready(function () {
 					data:'dni=' + dni,
 					dataType:'text',
 					success: function (data) {
-						if (data === 'ok') {
+						if (data === 'ok' || data === 'gracias') {
 							$('#inicio').fadeToggle('fast', 'swing', function() {
 								$('#tuDni').val(dni);
 								$('#subirVideo').fadeToggle('slow');
 							});
 							return false;
 						} else if (data === 'error') {
-							mensaje = 'Usted no puede participar.';
+							mensaje = 'Lo sentimos, pero el acceso es únicamente para trabajadores de Entel ;)';
 							$('#mensajeError').html(mensaje).stop().fadeIn('fast').delay(3000).fadeOut('fast');
 							return false;
-						} else if (data === 'gracias') {
+						} /* else if (data === 'gracias') {
 							$('#inicio').fadeToggle('fast', 'swing', function() {
-								$('#mensaje').fadeToggle('slow');
+								$('#mensajeGracias').fadeToggle('slow');
 							});
 							return false;
-						}
+						}*/
 					}
 				});
 			} else {
@@ -63,28 +60,34 @@ $(document).ready(function () {
 		}
 		return false;
 	});
-	$('#elegirArchivo').click(function() {
-		$('#archivo').trigger('click');
+	$('.elegirArchivo').click(function() {
+		if (!flagTyc) return false;
+		//$('#archivo').trigger('click');
+		paso2();
 		return false;
 	});
-	$('#archivo').change(function() {
-		archivo = $(this)[0].files[0];
-		$('.archivo').html(archivo.name);
-		flagArchivo = true;
-		paso2();
+	$('#archivo').change(function(e) {
+		var archivo = e.target.value;
+		archivo = archivo.split('\\').pop().split('/').pop();
+		$('.archivo').html(archivo);
+		$('.archivo, #confirmar').show('fast');
 	});
 	$('.tyc').click(function() {
 		flagTyc = !flagTyc;
 		$(this).toggleClass('ok');
-		paso2();
 		return false;
+	});
+	$('.tyc a').click(function(e) {
+		e.stopPropagation();
 	});
 	$('#confirmar').click(function() {
-		if (flagConfirmar)
+		if (flagConfirmar) {
+			$('.progreso').show('fast');
 			$('#enviarDatos').submit();
+		}
 		return false;
 	});
-	$('#enviarDatos').submit(function(e) {
+/*	$('#enviarDatos').submit(function(e) {
 		e.preventDefault();
 		$('#loader-icon').show();
 		$(this).ajaxSubmit({
@@ -106,5 +109,5 @@ $(document).ready(function () {
 			resetForm:true
 		});
 		return false;
-	});
+	});*/
 });

@@ -2,20 +2,23 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="X-UA-Compatible" content="IE=9">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Entel Perú, Corazón Peruano</title>
 		<link href="{{url()}}/css/bootstrap.min.css" rel="stylesheet">
-		<link href="{{url()}}/css/main.css" rel="stylesheet">
+		<link href="{{url()}}/css/main.css?v=1" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script src="{{url()}}/js/queryloader2.min.js"></script>
 		<script type="text/javascript">
 			var urlBase = '{{url()}}';
+		</script>
+		<!--[if !IE]><!-->
+		<script src="{{url()}}/js/queryloader2.min.js"></script>
+		<script type="text/javascript">
 			window.addEventListener('DOMContentLoaded', function () {
 				new QueryLoader2(document.querySelector("body"), {
 					barColor:"#fff",
@@ -26,15 +29,33 @@
 					maxTime:25000,
 					fadeOutTime:1000,
 					onComplete: function() {
-						setTimeout(function(){ $('#inicio').fadeToggle('slow', 'swing'); }, 1500);
+						setTimeout(function(){ $('#inicio').fadeToggle('slow', 'swing'); }, 1750);
 					}
 				});
 			});
 		</script>
+		<!--<![endif]-->
 		<script src="{{url()}}/js/jquery.min.js"></script>
-		<script src="{{url()}}/js/bootstrap.min.js"></script>
-		<script src="{{url()}}/js/jquery.form.min.js"></script>
-		<script src="{{url()}}/js/main.js"></script>
+		<!--[if !IE]><!-->
+		<script src="{{url()}}/js/main.js?v=1"></script>
+		<!--<![endif]-->
+		<!--[if IE]>
+		<script src="{{url()}}/js/main-ie.js"></script>
+		<script>
+			$(window).load(function() {
+				setTimeout(function(){ $('#inicio').fadeToggle('slow', 'swing'); }, 1750);
+			});
+		</script>
+		<![endif]-->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-65121437-1', 'auto');
+			ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+		</script>
 	</head>
 	<body>
 		<header>
@@ -47,11 +68,11 @@
 						<p class="text-right compartir">
 							<img src="{{url()}}/img/compartir-siguenos.png" alt="" class="hidden-xs">
 							&nbsp;&nbsp;
-							<a href="https://www.facebook.com/EntelPeru" target="_blank">
+							<a id="rs_facebook" href="https://www.facebook.com/EntelPeru" target="_blank">
 								<img src="{{url()}}/img/compartir-facebook.png" alt="">
 							</a>
 							<span class="hidden-xs">&nbsp;&nbsp;</span>
-							<a href="https://twitter.com/EntelPeru" target="_blank">
+							<a id="rs_twitter" href="https://twitter.com/EntelPeru" target="_blank">
 								<img src="{{url()}}/img/compartir-twitter.png" alt="">
 							</a>
 						</p>
@@ -63,9 +84,9 @@
 			<div class="container">
 				<img src="{{url()}}/img/corazon-peruano-home.png" alt="#corazónperuano" class="img-responsive center-block">
 				<label class="center-block text-center">
-					Ingresa tu DNI para acceder:
+					Ingresa tu Doc. de Identidad para acceder:
 					<br>
-					<input type="text" name="dni" id="dni" maxlength="8">
+					<input type="text" name="dni" id="dni" maxlength="10">
 					<br>
 					<span id="mensajeError" class="label label-danger" style="display:none"></span>
 				</label>
@@ -78,39 +99,52 @@
 		</div>
 		<div id="subirVideo" class="jumbotron" style="display:none">
 			<div class="container">
-				<div class="marco center-block">
+				<div class="marco hidden-xs center-block">
 					<img src="{{url()}}/img/corazon-peruano-subir.png" alt="#corazónperuano" class="img-responsive center-block">
-					<p class="text-center">
-						<strong>Demuestra tu corazón peruano y participa por tres iPhone 6.</strong><br>
-						Para concursar, solo tienes que grabarte haciendo eso que te identifique<br>
-						con orgullo como peruano. <strong>Si lo haces con tu uniforme Entel, mejor ;)</strong>
-						<br><br>
-						Puedes grabarte solo o en grupo, comiendo ceviche o bailando festejo.<br>
-						<strong>¡¡Tienes total libertad para demostrar tu peruanidad!!</strong>
-						<br><br>
-						Ten en cuenta que el ritmo del video final será<br>
-						como en la siguiente referencia:
+					<h2 class="text-center">
+						¡Participa por tres iPhone 6!
+					</h2>
+					<p>
+						<strong>
+							Para concursar, solo tienes que demostrar tu corazón peruano<br>
+							y grabarte haciendo eso que te identifique con orgullo como peruano.
+						</strong>
+					</p>
+					<p>
+						Puedes aparecer solo o en grupo, comiendo un ceviche o un pan con<br>
+						chicharrón, tomándote un pisco sour o un emoliente, tocando cajón<br>
+						o bailando festejo. Aquí tienes una referencia, pero...<br>
+						<strong>
+							¡¡tienes total libertad para demostrar tu peruanidad!!
+						</strong>
 					</p>
 					<div class="botones center-block">
-						<img src="{{url()}}/img/video-player.jpg" alt="" class="center-block img-responsive">
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/d_FqF3u22Lc?rel=0&amp;controls=1&amp;showinfo=0"></iframe>
+						</div>
 						<div class="paso-1">
-							<a href="#" class="tyc">
-								&nbsp;
-							</a>
-							<a href="#" id="elegirArchivo" class="pull-right">
+							<div class="tyc">
+								Acepto los <a href="http://corazonperuano.pe/docs/Bases%20-%20Corazo%CC%81n%20Orgullo%20Peruano.pdf" target="_blank">Términos y Condiciones</a><br>
+								y el <a href="http://corazonperuano.pe/docs/Aceptacio%CC%81n%20del%20Uso%20de%20Derechos%20de%20imagen.pdf" target="_blank">Acuerdo de Privacidad</a>
+							</div>
+							<a href="#" class="elegirArchivo pull-right">
 								<img src="{{url()}}/img/boton-subir-video.png" alt="" class="img-responsive">
 							</a>
 							<div class="clearfix"></div>
 						</div>
 						<div class="paso-2" style="display:none">
-							<div class="progreso pull-left" id="progress-div">
-								<div id="progress-bar">
-									<div id="progress-status">
-									</div>
-								</div>
+							<form id="enviarDatos" action="{{url()}}/enviarDatos" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<input type="file" id="archivo" name="archivo" accept="video/*" size="25">
+	  							</div>
+								<input type="hidden" name="dni" id="tuDni">
+								<input type="hidden" name="ie" id="ie" value="0">
+							</form>
+							<div class="progreso pull-left" style="display:none">
+								
 							</div>
-							<span class="archivo text-right"></span>
-							<a href="#" id="confirmar" class="pull-right">
+							<span class="archivo text-right" style="display:none"></span>
+							<a href="#" id="confirmar" class="pull-right" style="display:none">
 								<img src="{{url()}}/img/boton-confirmar.png" alt="" class="img-responsive">
 							</a>
 							<div class="clearfix"></div>
@@ -140,16 +174,31 @@
 				</div>
 			</div>
 		</div>
+		<div id="mensajeGracias" class="jumbotron" style="display:none">
+			<div class="container">
+				<div class="marco center-block">
+					<img src="{{url()}}/img/corazon-peruano-subir.png" alt="#corazónperuano" class="img-responsive center-block">
+					<h3 class="text-center">
+						¡Muchas gracias por habernos ayudado!
+					</h3>
+					<p class="text-center">
+						Muy pronto, demostraremos a todo el Perú que nuestro corazón
+						es bien peruano. No dejes de seguir nuestra página de Facebook
+						y <strong>comparte el video final cuando lo lancemos</strong>.
+						<br><br>
+						Los ganadores de los premios, los comunicaremos vía e-mail.<br>
+						<strong>¡Suerte!</strong>
+					</p>
+				</div>
+			</div>
+		</div>
 		<div style="display:none">
-			<form id="enviarDatos" action="{{url()}}/enviarDatos" method="post" enctype="multipart/form-data">
-				<input type="file" id="archivo" name="archivo" accept="video/*">
-				<input type="hidden" name="dni" id="tuDni">
-			</form>
+			
 		</div>
 		<footer>
 			<section class="container">
 				<p class="text-center">
-					<img src="{{url()}}/img/entel-footer.jpg" alt="">
+					<img class="logo" src="{{url()}}/img/entel-footer.jpg" alt="">
 					<br>
 					Copyright Entel Perú S.A., Todos los derechos reservados.
 				</p>

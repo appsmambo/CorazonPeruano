@@ -4,11 +4,18 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
-		return View::make('index');
+		if (Agent::isMobile())
+			return View::make('mobile');
+		else
+			return View::make('index');
 	}
 	
 	public function postSubirVideo()
 	{
+
+		$res = '';
+		$ie = Input::get('ie');
+		
 		if (isset($_FILES['archivo'])) {
 
 			$file = $_FILES['archivo'];
@@ -23,21 +30,33 @@ class HomeController extends BaseController {
 			$tmp_file_name = "{$key}.{$extension}";
 			$tmp_file_path = "../uploads/{$tmp_file_name}";
 
-			$return = move_uploaded_file($tmp_name, $tmp_file_path);
+			move_uploaded_file($tmp_name, $tmp_file_path);
 
-			if ($return) {
-				$videos = new Videos();
-				$videos->dni		= trim(Input::get('dni'));
-				$videos->archivo	= $key;
-				$videos->extension	= $extension;
-				$videos->ip			= Request::getClientIp(true);
-				$videos->save();
-				return '1';
-			} else {
-				return 'error';
-			}
+			$videos = new Videos();
+			$videos->dni		= trim(Input::get('dni'));
+			$videos->archivo	= $key;
+			$videos->extension	= $extension;
+			$videos->ip			= Request::getClientIp(true);
+			$videos->save();
+			$res = '1';
+			
+		} else {
+			$res = '0';
 		}
-		return '0';
+		
+		/*if (Agent::isMobile())
+			return View::make('mensaje.mobile');
+		if ($ie === '1') {
+			return View::make('mensaje');
+		} else {
+			return $res;
+		}*/
+
+		if (Agent::isMobile())
+			return View::make('mensajeMobile');
+		else
+			return View::make('mensaje');
+
 	}
 	
 	public function postValidaTuDni()
