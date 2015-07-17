@@ -83,62 +83,76 @@
 					</div>
 				</div>
 				<div class="slide active">
+					<p><br><br></p>
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-xs-10 col-xs-offset-1">
 							<div class="marco center-block">
 								<img src="{{url()}}/img/corazon-peruano-subir.png" alt="#corazónperuano" class="img-responsive center-block" style="width:120px">
 								<h2 class="text-center">
 									¡Participa por tres iPhone 6!
 								</h2>
 								<p class="text-center">
+									Para concursar, solo tienes que demostrar tu corazón peruanoy grabarte haciendo eso que te identifique con orgullo como peruano.
+									<br>
+									Puedes grabarte solo o en grupo, comiendo ceviche o bailando festejo.
+									<br>
 									<strong>
-										Para concursar, solo tienes que demostrar tu corazón peruano y grabarte haciendo eso que te identifique con orgullo como peruano.
+										¡¡Tienes total libertad para demostrar tu peruanidad!!
 									</strong>
 									<br>
-									Aquí tienes una referencia, pero...<br>
-									<strong>
-										¡¡tienes total libertad para demostrar tu peruanidad!!
-									</strong>
+									Ten en cuenta que el ritmo del video final será como en la siguiente referencia:
 								</p>
 								<div class="botones center-block">
 									<div class="row">
-										<div class="col-xs-8 col-xs-offset-2">
+										<div class="col-xs-10 col-xs-offset-1">
 											<div class="embed-responsive embed-responsive-16by9">
 												<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/d_FqF3u22Lc?rel=0&amp;controls=1&amp;showinfo=0"></iframe>
 											</div>
 										</div>
 									</div>
-									<div class="paso-1">
-										<div class="tyc">
-											Acepto los <a href="http://corazonperuano.pe/docs/Bases%20-%20Corazo%CC%81n%20Orgullo%20Peruano.pdf" target="_blank">Términos y Condiciones</a><br>
-											y el <a href="http://corazonperuano.pe/docs/Aceptacio%CC%81n%20del%20Uso%20de%20Derechos%20de%20imagen.pdf" target="_blank">Acuerdo de Privacidad</a>
+									<div class="row">
+										<div class="col-xs-10 col-xs-offset-1">
+											<span id="mensajeArchivo" class="label label-danger" style="display:none"></span>
+											<div class="paso-1">
+												<div class="tyc">
+													Acepto los <a href="http://corazonperuano.pe/docs/Bases%20-%20Corazo%CC%81n%20Orgullo%20Peruano.pdf" target="_blank">Términos y Condiciones</a>
+													y el <a href="http://corazonperuano.pe/docs/Aceptacio%CC%81n%20del%20Uso%20de%20Derechos%20de%20imagen.pdf" target="_blank">Acuerdo de Privacidad</a>
+												</div>
+												<a href="#" class="elegirArchivo pull-right">
+													<img src="{{url()}}/img/boton-subir-video.png" alt="" class="img-responsive" style="width:135px">
+												</a>
+											</div>
+											<div class="paso-2" style="display:none">
+												<form id="enviarDatos" action="{{url()}}/enviarDatos" method="post" enctype="multipart/form-data">
+													<div class="row" style="height:0;opacity:0;overflow:hidden">
+														<div class="col-xs-9">
+															<div class="form-group">
+																<input type="file" id="archivo" name="archivo" accept="video/*">
+															</div>
+														</div>
+														<div class="col-xs-3">
+															<img src="{{url()}}/img/icon-subir.png" alt="" id="botonSubir">
+														</div>
+													</div>
+													<input type="hidden" name="dni" id="tuDni">
+													<input type="hidden" name="ie" id="ie" value="0">
+												</form>
+												<span class="archivo text-right"></span>
+												<div class="progreso pull-left" style="display:none"></div>
+												<a href="#" id="confirmar" class="pull-right" style="display:none">
+													<img src="{{url()}}/img/boton-confirmar.png" alt="" class="img-responsive">
+												</a>
+												<div class="clearfix"></div>
+											</div>
 										</div>
-										<a href="#" class="elegirArchivo pull-right">
-											<img src="{{url()}}/img/boton-subir-video.png" alt="" class="img-responsive" style="width:135px">
-										</a>
 									</div>
-									<div class="paso-2" style="display:none">
-										<form id="enviarDatos" action="{{url()}}/enviarDatos" method="post" enctype="multipart/form-data">
-											<div class="form-group">
-												<input type="file" id="archivo" name="archivo" accept="video/*" size="25">
-				  							</div>
-											<input type="hidden" name="dni" id="tuDni">
-											<input type="hidden" name="ie" id="ie" value="0">
-										</form>
-										<div class="progreso pull-left" style="display:none">
 											
-										</div>
-										<span class="archivo text-right"></span>
-										<a href="#" id="confirmar" class="pull-right">
-											<img src="{{url()}}/img/boton-confirmar.png" alt="" class="img-responsive" style="width:135px">
-										</a>
-										<div class="clearfix"></div>
-									</div>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>
+					<p><br><br></p>
 				</div>
 				<div class="slide active">
 					<div class="row">
@@ -173,11 +187,17 @@
 				</p>
 			</section>
 		</footer>
+		<div class="hidden">
+			<img src="{{url()}}/img/loader.gif" alt="">
+			<img src="{{url()}}/img/ajax-loader.gif" alt="">
+		</div>
 		<script>
 			$(document).ready(function () {
 				$('#fullpage').fullpage({
 					slidesNavigation:false,
 					keyboardScrolling:false,
+					scrollOverflow:true,
+					scrollBar:true,
 					recordHistory:false,
 					controlArrows:false,
 					touchSensitivity:1500,

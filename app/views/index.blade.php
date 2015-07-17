@@ -57,7 +57,8 @@
 			ga('send', 'pageview');
 		</script>
 	</head>
-	<body>
+<!--[if IE]><body class="ie"><![endif]-->
+<!--[if !IE]><!--><body><!--<![endif]-->
 		<header>
 			<section class="container">
 				<div class="row">
@@ -118,10 +119,15 @@
 							¡¡tienes total libertad para demostrar tu peruanidad!!
 						</strong>
 					</p>
-					<div class="botones center-block">
-						<div class="embed-responsive embed-responsive-16by9">
-							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/d_FqF3u22Lc?rel=0&amp;controls=1&amp;showinfo=0"></iframe>
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<div class="embed-responsive embed-responsive-16by9">
+								<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/d_FqF3u22Lc?rel=0&amp;controls=1&amp;showinfo=0"></iframe>
+							</div>
 						</div>
+					</div>
+					<div class="botones center-block">
+						<span id="mensajeArchivo" class="label label-danger" style="display:none"></span>
 						<div class="paso-1">
 							<div class="tyc">
 								Acepto los <a href="http://corazonperuano.pe/docs/Bases%20-%20Corazo%CC%81n%20Orgullo%20Peruano.pdf" target="_blank">Términos y Condiciones</a><br>
@@ -135,7 +141,7 @@
 						<div class="paso-2" style="display:none">
 							<form id="enviarDatos" action="{{url()}}/enviarDatos" method="post" enctype="multipart/form-data">
 								<div class="form-group">
-									<input type="file" id="archivo" name="archivo" accept="video/*" size="25">
+									<input type="file" id="archivo" name="archivo" accept="video/*" class="pull-left">&nbsp;<img src="{{url()}}/img/icon-subir.png" alt="" id="botonSubir" class="pull-right">
 	  							</div>
 								<input type="hidden" name="dni" id="tuDni">
 								<input type="hidden" name="ie" id="ie" value="0">
@@ -191,9 +197,6 @@
 					</p>
 				</div>
 			</div>
-		</div>
-		<div style="display:none">
-			
 		</div>
 		<footer>
 			<section class="container">

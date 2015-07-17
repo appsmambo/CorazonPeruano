@@ -1,10 +1,22 @@
 var flagTyc = false, 
-	flagConfirmar = true,
 	archivo;
 function paso2() {
 	$('.paso-1').fadeToggle('fast', 'swing', function() {
 		$('.paso-2').show('fast');
 	});
+}
+function ValidateExtension() {
+	var allowedFiles = ['.mp4', '.wmv', '.mov', '.webm'];
+	var fileUpload = $('#archivo');
+	var lblError = $('#mensajeArchivo');
+	var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+	if (!regex.test(fileUpload.val().toLowerCase())) {
+		lblError.html("Solo archivos de video.");
+		lblError.show('fast').delay(3000).hide('fast');
+		return false;
+	}
+	lblError.html('');
+	return true;
 }
 $(document).ready(function () {
 	$('#ie').val('1');
@@ -58,15 +70,20 @@ $(document).ready(function () {
 	});
 	$('.elegirArchivo').click(function() {
 		if (!flagTyc) return false;
-		//$('#archivo').trigger('click');
 		paso2();
 		return false;
 	});
+	$('#botonSubir').click(function() {
+		$('#archivo').trigger('click');
+	});
 	$('#archivo').change(function(e) {
-		var archivo = e.target.value;
-		archivo = archivo.split('\\').pop().split('/').pop();
-		$('.archivo').html(archivo);
-		$('.archivo, #confirmar').show('fast');
+		if (ValidateExtension()) {
+			var archivo = e.target.value;
+			archivo = archivo.split('\\').pop().split('/').pop();
+			$('.archivo').html(archivo);
+			$('.archivo, #confirmar').show('fast');
+		}
+
 	});
 	$('.tyc').click(function() {
 		flagTyc = !flagTyc;
@@ -77,7 +94,7 @@ $(document).ready(function () {
 		e.stopPropagation();
 	});
 	$('#confirmar').click(function() {
-		if (flagConfirmar) {
+		if (ValidateExtension()) {
 			$('.progreso').show('fast');
 			$('#enviarDatos').submit();
 		}

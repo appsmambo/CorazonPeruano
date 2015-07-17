@@ -1,10 +1,21 @@
-var flagTyc = false, 
-	flagConfirmar = true,
-	archivo;
+var flagTyc = false;
 function paso2() {
 	$('.paso-1').fadeToggle('fast', 'swing', function() {
 		$('.paso-2').show('fast');
 	});
+}
+function ValidateExtension() {
+	var allowedFiles = ['.mp4', '.wmv', '.mov', '.webm'];
+	var fileUpload = $('#archivo');
+	var lblError = $('#mensajeArchivo');
+	var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+	if (!regex.test(fileUpload.val().toLowerCase())) {
+		lblError.html("Solo archivos de video.");
+		lblError.show('fast').delay(3000).hide('fast');
+		return false;
+	}
+	lblError.html('');
+	return true;
 }
 $(document).ready(function () {
 	$("#dni").bind("keydown", function (event) {
@@ -23,18 +34,19 @@ $(document).ready(function () {
 		}
 	});
 	$('.entrar').click(function() {
-		$('#fullpage').css({'-webkit-transform':'translate3d(0px,0px,0px)','transform':'translate3d(0px,0px,0px)'});
 		var mensaje = 'Ingresa tu DNI correctamente!';
 		var dni = $('#dni').val();
 		if (parseInt(dni) > 0) {
 			if (dni.length >= 8) {
 				// validar el dni
+				$('#dni').addClass('procesando');
 				$.ajax({
 					url:urlBase + '/tuDni',
 					type:'POST',
 					data:'dni=' + dni,
 					dataType:'text',
 					success: function (data) {
+						$('#dni').removeClass('procesando');
 						if (data === 'ok' || data === 'gracias') {
 							$('#tuDni').val(dni);
 							$.fn.fullpage.moveTo(1, 1);
@@ -56,15 +68,17 @@ $(document).ready(function () {
 	});
 	$('.elegirArchivo').click(function() {
 		if (!flagTyc) return false;
-		//$('#archivo').trigger('click');
-		paso2();
+		$('#archivo').trigger('click');
 		return false;
 	});
 	$('#archivo').change(function(e) {
-		var archivo = e.target.value;
-		archivo = archivo.split('\\').pop().split('/').pop();
-		$('.archivo').html(archivo);
-		$('.archivo, #confirmar').show('fast');
+		if (ValidateExtension()) {
+			paso2();
+			var archivo = e.target.value;
+			archivo = archivo.split('\\').pop().split('/').pop();
+			$('.archivo').html(archivo);
+			$('.archivo, #confirmar').show('fast');
+		}
 	});
 	$('.tyc').click(function() {
 		flagTyc = !flagTyc;
@@ -75,7 +89,7 @@ $(document).ready(function () {
 		e.stopPropagation();
 	});
 	$('#confirmar').click(function() {
-		if (flagConfirmar) {
+		if (ValidateExtension()) {
 			$('.progreso').show('fast');
 			$('#enviarDatos').submit();
 		}

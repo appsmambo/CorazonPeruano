@@ -64,7 +64,7 @@
 		<div id="fullpage">
 			<div class="section active">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-10 col-xs-offset-1">
 						<div class="marco center-block">
 							<img src="{{url()}}/img/corazon-peruano-subir.png" alt="#corazónperuano" class="img-responsive center-block">
 							<p class="titulo text-center">
@@ -79,6 +79,7 @@
 								<br><br>
 								Los ganadores de los premios, los comunicaremos vía e-mail.<br>
 								<strong>¡Suerte!</strong>
+								<br>
 							</p>
 						</div>
 					</div>

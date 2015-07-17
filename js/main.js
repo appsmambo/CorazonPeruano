@@ -1,10 +1,22 @@
-var flagTyc = false, 
-	flagConfirmar = true,
+var flagTyc = false,
 	archivo;
 function paso2() {
 	$('.paso-1').fadeToggle('fast', 'swing', function() {
 		$('.paso-2').show('fast');
 	});
+}
+function ValidateExtension() {
+	var allowedFiles = ['.mp4', '.wmv', '.mov', '.webm'];
+	var fileUpload = $('#archivo');
+	var lblError = $('#mensajeArchivo');
+	var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+	if (!regex.test(fileUpload.val().toLowerCase())) {
+		lblError.html("Solo archivos de video.");
+		lblError.show('fast').delay(3000).hide('fast');
+		return false;
+	}
+	lblError.html('');
+	return true;
 }
 $(document).ready(function () {
 	$("#dni").bind("keydown", function (event) {
@@ -27,6 +39,7 @@ $(document).ready(function () {
 		var dni = $('#dni').val();
 		if (parseInt(dni) > 0) {
 			if (dni.length >= 8) {
+				$('#dni').addClass('procesando');
 				// validar el dni
 				$.ajax({
 					url:urlBase + '/tuDni',
@@ -34,6 +47,7 @@ $(document).ready(function () {
 					data:'dni=' + dni,
 					dataType:'text',
 					success: function (data) {
+						$('#dni').removeClass('procesando');
 						if (data === 'ok' || data === 'gracias') {
 							$('#inicio').fadeToggle('fast', 'swing', function() {
 								$('#tuDni').val(dni);
@@ -62,15 +76,18 @@ $(document).ready(function () {
 	});
 	$('.elegirArchivo').click(function() {
 		if (!flagTyc) return false;
-		//$('#archivo').trigger('click');
-		paso2();
+		$('#archivo').trigger('click');
+		//paso2();
 		return false;
 	});
 	$('#archivo').change(function(e) {
-		var archivo = e.target.value;
-		archivo = archivo.split('\\').pop().split('/').pop();
-		$('.archivo').html(archivo);
-		$('.archivo, #confirmar').show('fast');
+		if (ValidateExtension()) {
+			paso2();
+			var archivo = e.target.value;
+			archivo = archivo.split('\\').pop().split('/').pop();
+			$('.archivo').html(archivo);
+			$('.archivo, #confirmar').show('fast');
+		}
 	});
 	$('.tyc').click(function() {
 		flagTyc = !flagTyc;
@@ -81,33 +98,10 @@ $(document).ready(function () {
 		e.stopPropagation();
 	});
 	$('#confirmar').click(function() {
-		if (flagConfirmar) {
+		if (ValidateExtension()) {
 			$('.progreso').show('fast');
 			$('#enviarDatos').submit();
 		}
 		return false;
 	});
-/*	$('#enviarDatos').submit(function(e) {
-		e.preventDefault();
-		$('#loader-icon').show();
-		$(this).ajaxSubmit({
-			beforeSubmit:function() {
-				flagConfirmar = false;
-				$('.progreso').fadeTo('slow', 1);
-				$("#progress-bar").width('0%');
-			},
-			uploadProgress:function (event, position, total, percentComplete){
-				$("#progress-bar").width(percentComplete + '%');
-				$("#progress-status").html(percentComplete + '%');
-			},
-			success:function (data) {
-				// mensaje
-				$('#subirVideo').fadeToggle('fast', 'swing', function() {
-					$('#mensaje').fadeToggle('slow');
-				});
-			},
-			resetForm:true
-		});
-		return false;
-	});*/
 });
