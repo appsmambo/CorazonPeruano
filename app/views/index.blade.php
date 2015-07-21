@@ -149,7 +149,7 @@
 							<div class="progreso pull-left" style="display:none">
 								
 							</div>
-							<span class="archivo text-right" style="display:none"></span>
+							<span class="archivo" style="display:none"></span>
 							<a href="#" id="confirmar" class="pull-right" style="display:none">
 								<img src="{{url()}}/img/boton-confirmar.png" alt="" class="img-responsive">
 							</a>

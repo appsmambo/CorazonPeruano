@@ -34,6 +34,7 @@ class HomeController extends BaseController {
 
 			$videos = new Videos();
 			$videos->dni		= trim(Input::get('dni'));
+			$videos->archivo_original = $name;
 			$videos->archivo	= $key;
 			$videos->extension	= $extension;
 			$videos->ip			= Request::getClientIp(true);
@@ -78,6 +79,54 @@ class HomeController extends BaseController {
 			$resultado = 'gracias';
 		}
 		return $resultado;
+	}
+	
+	public function getlistaDeVideos()
+	{
+		return View::make('acceso');
+	}
+	
+	public function postlistaDeVideos()
+	{
+		$clave = trim(Input::get('clave'));
+		if ($clave === 'mdSMMoczVY') {
+			$results = DB::select( DB::raw('select d.nombre, d.dni, v.id, v.extension from dni d, videos v where d.dni = v.dni and v.estado = 1 order by v.id') );
+			return View::make('listado')->with('resultado', $results);
+		} else {
+			return View::make('acceso')->with('mensaje', 'Clave incorrecta.');
+		}
+	}
+	
+	public function getDescargaVideos($id, $item)
+	{
+		$video = Videos::find($id);
+		$archivo = '/home/corazonperuano/uploads/' . $video->archivo . '.' . $video->extension;
+		$itemArchivo = $item . '.' . $video->extension;
+		if (file_exists($archivo)) {
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Disposition: attachment; filename='.basename($itemArchivo));
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($archivo));
+			readfile($archivo);
+			exit;
+		}
+	}
+	
+	public function getVerVideos($id, $item)
+	{
+		$video = Videos::find($id);
+		$archivo = '/home/corazonperuano/uploads/' . $video->archivo . '.' . $video->extension;
+		$itemArchivo = $item . '.' . $video->extension;
+		if (file_exists($archivo)) {
+			$headers = array(
+				'Content-type'			=> 'video/'.$video->extension,
+				'Content-Disposition'	=> 'inline; filename='.$itemArchivo
+			);
+			return Response::make(file_get_contents($archivo), 200, $headers);
+		}
 	}
 
 }

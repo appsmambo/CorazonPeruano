@@ -237,6 +237,63 @@ form {
 	background-position:97% 50%;
 	background-repeat:no-repeat
 }
+.marco2 {
+	background-color:#fff;
+	padding:17px 28px 24px;
+	-webkit-border-bottom-right-radius:40px;
+	-moz-border-radius-bottomright:40px;
+	border-bottom-right-radius:40px;
+}
+#acceso {
+	margin-left:-310px;
+	margin-top:-200px;
+	width:620px
+}
+form.acceso {
+	height:auto;
+	opacity:1
+}
+form.acceso label {
+	color:#000;
+	margin:5px 0
+}
+form.acceso input {
+	text-align:left
+}
+#listado {
+	margin-bottom:68px;
+	margin-top:62px
+}
+#listado td {
+	color:#0254a0;
+	font-size:14px
+}
+#listado label {
+	margin:5px 0
+}
+.dataTables_wrapper {
+	background-color:#fff;
+	padding:5px
+}
+thead, tfoot {
+	display:none
+}
+th.sorting,
+th.sorting_asc,
+th.sorting_desc,
+tfoot th {
+	background-color:#03539f;
+	font-size:14px
+}
+tr.group td {
+	background-color:#03539f;
+	color:#FFF!important
+}
+#listadoVideos_filter input {
+	border-bottom:1px solid;
+	font-size:14px;
+	line-height:26px
+}
 
 @media (max-width:767px) {
 	#inicio {
