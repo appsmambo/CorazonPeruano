@@ -61,9 +61,9 @@
 				</div>
 			</section>
 		</header>
-		<div id="fullpage">
-			<div class="section active">
-				<div class="slide active">
+		<div id="content-iphone">
+			<div>
+				<div id="home">
 					<div class="row">
 						<div class="col-xs-10 col-xs-offset-1">
 							<img src="{{url()}}/img/corazon-peruano-home.png" alt="#corazónperuano" class="img-responsive center-block">
@@ -82,8 +82,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="slide active">
-					<p class="iphone-parrafo"><br><br></p>
+				<div id="interna">
+					<p><br><br></p>
 					<div class="row">
 						<div class="col-xs-10 col-xs-offset-1 scrool-mobile">
 							<div class="marco center-block">
@@ -154,7 +154,7 @@
 					</div>
 					<p><br><br></p>
 				</div>
-				<div class="slide active">
+				<div id="gracias">
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="marco center-block">
@@ -199,7 +199,8 @@
 					scrollOverflow:true,
 					scrollBar:true,
 					recordHistory:false,
-					controlArrows:false
+					controlArrows:false,
+					touchSensitivity:1500
 				});
 			});
 		</script>

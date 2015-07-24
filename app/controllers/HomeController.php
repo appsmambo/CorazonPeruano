@@ -6,6 +6,7 @@ class HomeController extends BaseController {
 	{
 		if (Agent::isMobile())
 			return View::make('mobile');
+			//return View::make('mobile-iphone');
 		else
 			return View::make('index');
 	}

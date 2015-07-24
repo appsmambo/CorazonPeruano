@@ -84,9 +84,11 @@
 <tr>
 	<td>{{$i}}.{{$video->extension}}</td>
 	<td>
+@if($video->extension !== 'entel')
 		<a href="{{url()}}/descargaVideo/{{$video->id}}/{{$i}}" title="Descargar video">Descargar video <img alt="Descargar video" src="{{url()}}/img/download.png" width="20"></a>
 		&nbsp;&nbsp;|&nbsp;&nbsp;
 		<a href="{{url()}}/verVideo/{{$video->id}}/{{$i}}" title="Ver video" target="_blank">Ver video <img alt="Ver video" src="{{url()}}/img/play.png" width="20"></a>
+@endif
 	</td>
 	<td>{{$video->nombre}} - {{$video->dni}}</td>
 </tr>

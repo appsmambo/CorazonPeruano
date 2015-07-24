@@ -379,3 +379,8 @@ tr.group td {
 		height:29px
 	}
 }
+@media (max-width:330px) {
+	.iphone-parrafo{
+		display: none;
+	}
+}

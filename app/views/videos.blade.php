@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="slide active">
-					<p class="iphone-parrafo"><br><br></p>
+					<p><br><br></p>
 					<div class="row">
 						<div class="col-xs-10 col-xs-offset-1 scrool-mobile">
 							<div class="marco center-block">
@@ -199,7 +199,8 @@
 					scrollOverflow:true,
 					scrollBar:true,
 					recordHistory:false,
-					controlArrows:false
+					controlArrows:false,
+					touchSensitivity:1500
 				});
 			});
 		</script>
